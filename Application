@@ -1,0 +1,93 @@
+package lolly.j01.Test1;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+/*
+一个登录界面的Java程序
+ */
+
+public class LoginWindow extends JFrame{
+    private JLabel userName_Label;
+    private JLabel password_Label;
+    private JTextField userName_TestField;
+    private JPasswordField passwordField;
+    private JButton login_btn;
+    private JButton cancel_btn;
+
+    public LoginWindow() {
+        init();
+    }
+    private void init() {
+        setSize(600,400);
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setResizable(true);
+        setTitle("Welcome to this LoginWindow!");
+        setVisible(true);
+
+        Container container = getContentPane();
+        container.setLayout(null);
+
+        userName_Label=new JLabel("UserName:");
+        password_Label=new JLabel("Passwords:");
+        userName_TestField=new JTextField();
+        passwordField=new JPasswordField();
+        login_btn=new JButton("Log In");
+        cancel_btn=new JButton("Cancel");
+
+        userName_Label.setSize(70,40);
+        userName_Label.setLocation(100,60);
+        userName_Label.setFont(new Font("微软雅黑",Font.PLAIN,20));
+
+        userName_TestField.setBounds(200,60,300,40);
+        //userName_TestField.setBackground(Color.blue);
+        userName_TestField.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                passwordField.requestFocus();
+            }
+        });
+
+        password_Label.setSize(70,40);
+        password_Label.setLocation(100,160);
+        password_Label.setFont(new Font("微软雅黑",Font.PLAIN,20));
+        passwordField.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                login_btn.doClick();
+            }
+        });
+
+        passwordField.setBounds(200,160,300,40);
+        passwordField.setEchoChar('$');
+
+        login_btn.setBounds(130,240,150,40);
+        login_btn.setFont(new Font("微软雅黑",Font.PLAIN,20));
+        login_btn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String userName=userName_TestField.getText();
+                String pwd=new String(passwordField.getPassword());
+                System.out.println("UserName:"+userName);
+                System.out.println("Passwords"+pwd);
+                System.out.println("Logging In......");
+            }
+        });
+
+        cancel_btn.setBounds(320,240,150,40);
+        cancel_btn.setFont(new Font("微软雅黑",Font.PLAIN,20));
+
+        container.add(userName_Label);
+        container.add(password_Label);
+        container.add(userName_TestField);
+        container.add(passwordField);
+        container.add(login_btn);
+        container.add(cancel_btn);
+    }
+    public static void main(String[] args) {
+        LoginWindow loginWindow = new LoginWindow();
+    }
+}
